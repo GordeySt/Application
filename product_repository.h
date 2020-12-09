@@ -25,6 +25,7 @@ public:
 	bool checkDuplicate(string name, string type);
 	void deleteRecord(string name, string type);
 	void changeRecord(string name, string type);
+	void filterRecord(string typeOfProduct, string type);
 	void sortRecords();
 	void readFile();
 	void rewrite();

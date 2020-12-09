@@ -45,18 +45,42 @@ void ProductRepository::addRecord(Product* product, int type)
 
 bool ProductRepository::findRecord(string name, string type)
 {
-	string newInputName = str_tolower(name);
+	name = str_tolower(name);
 	for (int i = 0; i < _products.size(); i++)
 	{
-		string prodName = _products[i]->getName();
-		string newProdName = str_tolower(prodName);
-		if (newProdName == newInputName && _products[i]->getTypeOp() == type)
+		string prodName = str_tolower(_products[i]->getName());
+		if (prodName == name && _products[i]->getTypeOp() == type)
 		{
 			return true;
 		}
 	}
 
 	return false;
+}
+
+void ProductRepository::filterRecord(string typeOfProduct, string type)
+{
+	int count = 0;
+	typeOfProduct = str_tolower(typeOfProduct);
+	for (int i = 0; i < _products.size(); i++)
+	{
+		string typeName = str_tolower(_products[i]->getType());
+		if (typeName == typeOfProduct && _products[i]->getTypeOp() == type)
+		{
+			table.firstCell(true);
+
+			cout << _products[i] << endl;
+		}
+		else
+		{
+			count++;
+		}
+	}
+
+	if (count == _products.size())
+	{
+		cout << "Нет ни одного препарата с таким типом." << endl;
+	}
 }
 
 void ProductRepository::deleteRecord(string name, string type)
@@ -207,22 +231,36 @@ void ProductRepository::rewrite()
 
 void ProductRepository::printImport()
 {
+	int count = 0;
 	for (int i = 0; i < _products.size(); i++)
 	{
 		table.firstCell(true);
 		if (_products[i]->getTypeOp() == "Импорт")
 			cout << _products[i] << endl;
+		else
+			count++;
+	}
+
+	if (count == _products.size())
+	{
+		cout << "Нет препаратов в базе импорта." << endl;
 	}
 }
 
 void ProductRepository::printExport()
 {
+	int count = 0;
 	for (int i = 0; i < _products.size(); i++)
 	{
 		table.firstCell(true);
 		if (_products[i]->getTypeOp() == "Экспорт")
 			cout << _products[i] << endl;
+		else
+			count++;
 	}
+
+	if (count == _products.size())
+		cout << "Нет препаратов в базе экспорта" << endl;
 }
 
 int ProductRepository::getIndex(string name)

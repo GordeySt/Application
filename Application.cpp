@@ -123,8 +123,9 @@ void adminMenu()
 		cout << "12 - Вывод импорта." << endl;
 		cout << "13 - Вывод экспорта." << endl;
 		cout << "14 - Сортировка препаратов." << endl;
-		cout << "15 - Открыть файл с препаратами." << endl;
-		cout << "16 - Назад" << endl;
+		cout << "15 - Фильтрация препаратов по типу." << endl;
+		cout << "16 - Открыть файл с препаратами." << endl;
+		cout << "17 - Назад" << endl;
 
 		choice = getNumber<int>("Ваш выбор: ");
 
@@ -323,8 +324,36 @@ void adminMenu()
 		case 12: productRep.printImport(); system("pause"); break;
 		case 13: productRep.printExport(); system("pause"); break;
 		case 14: productRep.sortRecords(); cout << "Сортировка прошла успешно." << endl; system("pause"); break;
-		case 15: system(("start " + productRep.getFilename()).c_str()); break;
-		case 16: isEnd = true; break;
+		case 15:
+		{
+			isOn = true;
+			string typeOfProd;
+			cout << "Введите тип препарата: "; cin >> typeOfProd;
+			do
+			{
+				cout << "Выберите, где хотите отфильтровать препараты." << endl;
+				cout << "1. Импорт" << endl;
+				cout << "2. Экспорт" << endl;
+				choice = getNumber<int>("Ваш выбор: ");
+				switch (choice)
+				{
+				case 1:
+					productRep.filterRecord(typeOfProd, "Импорт");
+					isOn = false;
+					break;
+				case 2:
+					productRep.filterRecord(typeOfProd, "Экспорт");
+					isOn = false;
+					break;
+				default:
+					cout << "Неккоректное число." << endl; break;
+				}
+			} while (isOn);
+			system("pause");
+			break;
+		}
+		case 16: system(("start " + productRep.getFilename()).c_str()); break;
+		case 17: isEnd = true; break;
 		default: cout << "Неккоректное число." << endl; system("pause"); break;
 		}
 
@@ -347,11 +376,12 @@ void userMenu()
 		cout << "3 - Изменить препарат." << endl;
 		cout << "4 - Найти препарат." << endl;
 		cout << "5 - Вывод импорта." << endl;
-		cout << "6 - Вывод экспорта." << endl;;
+		cout << "6 - Вывод экспорта." << endl;
 		cout << "7 - Сортировка препаратов." << endl;
-		cout << "8 - Открыть файл с препаратами." << endl;
-		cout << "9 - Назад" << endl;
-
+		cout << "8 - Фильтрация препаратов по типу." << endl;
+		cout << "9 - Открыть файл с препаратами." << endl;
+		cout << "10 - Назад" << endl;
+		
 		choice = getNumber<int>("Ваш выбор: ");
 
 		switch (choice)
@@ -511,8 +541,36 @@ void userMenu()
 		case 5: productRep.printImport(); system("pause"); break;
 		case 6: productRep.printExport(); system("pause"); break;
 		case 7: productRep.sortRecords(); cout << "Сортировка прошла успешно." << endl; system("pause"); break;
-		case 8: system(("start " + productRep.getFilename()).c_str()); break;
-		case 9: isEnd = true; break;
+		case 8:
+		{
+			isOn = true;
+			string typeOfProd;
+			cout << "Введите тип препарата: "; cin >> typeOfProd;
+			do
+			{
+				cout << "Выберите, где хотите отфильтровать препараты." << endl;
+				cout << "1. Импорт" << endl;
+				cout << "2. Экспорт" << endl;
+				choice = getNumber<int>("Ваш выбор: ");
+				switch (choice)
+				{
+				case 1:
+					productRep.filterRecord(typeOfProd, "Импорт");
+					isOn = false;
+					break;
+				case 2:
+					productRep.filterRecord(typeOfProd, "Экспорт");
+					isOn = false;
+					break;
+				default:
+					cout << "Неккоректное число." << endl; break;
+				}
+			} while (isOn);
+			system("pause");
+			break;
+		}
+		case 9: system(("start " + productRep.getFilename()).c_str()); break;
+		case 10: isEnd = true; break;
 		default: cout << "Неккоректное число." << endl; system("pause"); break;
 		}
 
