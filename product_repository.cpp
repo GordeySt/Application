@@ -9,31 +9,29 @@ using namespace std;
 
 extern StreamTable table;
 
-bool compareName(Product* firstProduct, Product* secondProduct)
+namespace SortingFunction
 {
-	return firstProduct->getName() < secondProduct->getName();
-}
+	bool compareName(Product* firstProduct, Product* secondProduct) {
+		return firstProduct->getName() < secondProduct->getName();
+	}
 
-bool compareProducer(Product* firstProduct, Product* secondProduct)
-{
-	return firstProduct->getProducer() < secondProduct->getProducer();
-}
+	bool compareProducer(Product* firstProduct, Product* secondProduct) {
+		return firstProduct->getProducer() < secondProduct->getProducer();
+	}
 
-bool compareType(Product* firstProduct, Product* secondProduct)
-{
-	return firstProduct->getType() < secondProduct->getType();
-}
+	bool compareType(Product* firstProduct, Product* secondProduct) {
+		return firstProduct->getType() < secondProduct->getType();
+	}
 
-bool comparePrice(Product* firstProduct, Product* secondProduct)
-{
-	return firstProduct->getPrice() < secondProduct->getPrice();
-}
+	bool comparePrice(Product* firstProduct, Product* secondProduct) {
+		return firstProduct->getPrice() < secondProduct->getPrice();
+	}
 
-bool compareAmount(Product* firstProduct, Product* secondProduct)
-{
-	return firstProduct->getAmount() < secondProduct->getAmount();
-}
+	bool compareAmount(Product* firstProduct, Product* secondProduct) {
+		return firstProduct->getAmount() < secondProduct->getAmount();
+	}
 
+}
 void ProductRepository::addRecord(Product* product, int type)
 {
 	_products.push_back(product);
@@ -115,27 +113,27 @@ void ProductRepository::sortRecords()
 	{
 	case 1:
 	{
-		std::sort(_products.begin(), _products.end(), compareName);
+		std::sort(_products.begin(), _products.end(), SortingFunction::compareName);
 		break;
 	}
 	case 2:
 	{
-		std::sort(_products.begin(), _products.end(), compareProducer);
+		std::sort(_products.begin(), _products.end(), SortingFunction::compareProducer);
 		break;
 	}
 	case 3:
 	{
-		std::sort(_products.begin(), _products.end(), compareType);
+		std::sort(_products.begin(), _products.end(), SortingFunction::compareType);
 		break;
 	}
 	case 4:
 	{
-		std::sort(_products.begin(), _products.end(), comparePrice);
+		std::sort(_products.begin(), _products.end(), SortingFunction::comparePrice);
 		break;
 	}
 	case 5:
 	{
-		std::sort(_products.begin(), _products.end(), compareAmount);
+		std::sort(_products.begin(), _products.end(), SortingFunction::compareAmount);
 		break;
 	}
 	default: cout << "Вы ввели некорректное число." << endl; system("pause"); return;
