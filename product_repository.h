@@ -26,6 +26,7 @@ public:
 	void deleteRecord(string name, string type);
 	void changeRecord(string name, string type);
 	void filterRecord(string typeOfProduct, string type);
+	void filterRecord(int priceFrom, int priceTo, string type);
 	void sortRecords();
 	void readFile();
 	void rewrite();

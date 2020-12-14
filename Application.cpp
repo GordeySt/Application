@@ -124,8 +124,9 @@ void adminMenu()
 		cout << "13 - Вывод экспорта." << endl;
 		cout << "14 - Сортировка препаратов." << endl;
 		cout << "15 - Фильтрация препаратов по типу." << endl;
-		cout << "16 - Открыть файл с препаратами." << endl;
-		cout << "17 - Назад" << endl;
+		cout << "16 - Фильтрация препаратов по общей цене." << endl;
+		cout << "17 - Открыть файл с препаратами." << endl;
+		cout << "18 - Назад" << endl;
 
 		choice = getNumber<int>("Ваш выбор: ");
 
@@ -352,8 +353,36 @@ void adminMenu()
 			system("pause");
 			break;
 		}
-		case 16: system(("start " + productRep.getFilename()).c_str()); break;
-		case 17: isEnd = true; break;
+		case 16:
+			isOn = true;
+			int priceFrom, priceTo;
+			cout << "Введите цену диапазон цен, в котором хотите просмотреть препараты." << endl;
+			priceFrom = getNumber<int>("От: ");
+			priceTo = getNumber<int>("До: ");
+			do
+			{
+				cout << "Выберите, где хотите отфильтровать препараты." << endl;
+				cout << "1. Импорт" << endl;
+				cout << "2. Экспорт" << endl;
+				choice = getNumber<int>("Ваш выбор: ");
+				switch (choice)
+				{
+				case 1:
+					productRep.filterRecord(priceFrom, priceTo, "Импорт");
+					isOn = false;
+					break;
+				case 2:
+					productRep.filterRecord(priceFrom, priceTo, "Экспорт");
+					isOn = false;
+					break;
+				default:
+					cout << "Неккоректное число." << endl; break;
+				}
+			} while (isOn);
+			system("pause");
+			break;
+		case 17: system(("start " + productRep.getFilename()).c_str()); break;
+		case 18: isEnd = true; break;
 		default: cout << "Неккоректное число." << endl; system("pause"); break;
 		}
 
@@ -379,8 +408,9 @@ void userMenu()
 		cout << "6 - Вывод экспорта." << endl;
 		cout << "7 - Сортировка препаратов." << endl;
 		cout << "8 - Фильтрация препаратов по типу." << endl;
-		cout << "9 - Открыть файл с препаратами." << endl;
-		cout << "10 - Назад" << endl;
+		cout << "9 - Фильтрация препаратов по общей цене" << endl;
+		cout << "10 - Открыть файл с препаратами." << endl;
+		cout << "11 - Назад" << endl;
 		
 		choice = getNumber<int>("Ваш выбор: ");
 
@@ -569,8 +599,38 @@ void userMenu()
 			system("pause");
 			break;
 		}
-		case 9: system(("start " + productRep.getFilename()).c_str()); break;
-		case 10: isEnd = true; break;
+		case 9:
+		{
+			isOn = true;
+			int priceFrom, priceTo;
+			cout << "Введите цену диапазон цен, в котором хотите просмотреть препараты." << endl;
+			priceFrom = getNumber<int>("От: ");
+			priceTo = getNumber<int>("До: ");
+			do
+			{
+				cout << "Выберите, где хотите отфильтровать препараты." << endl;
+				cout << "1. Импорт" << endl;
+				cout << "2. Экспорт" << endl;
+				choice = getNumber<int>("Ваш выбор: ");
+				switch (choice)
+				{
+				case 1:
+					productRep.filterRecord(priceFrom, priceTo, "Импорт");
+					isOn = false;
+					break;
+				case 2:
+					productRep.filterRecord(priceFrom, priceTo, "Экспорт");
+					isOn = false;
+					break;
+				default:
+					cout << "Неккоректное число." << endl; break;
+				}
+			} while (isOn);
+			system("pause");
+			break;
+		}
+		case 10: system(("start " + productRep.getFilename()).c_str()); break;
+		case 11: isEnd = true; break;
 		default: cout << "Неккоректное число." << endl; system("pause"); break;
 		}
 

@@ -81,6 +81,32 @@ void ProductRepository::filterRecord(string typeOfProduct, string type)
 	}
 }
 
+
+void ProductRepository::filterRecord(int priceFrom, int priceTo, string type)
+{
+	int count = 0;
+	int totalPrice;
+	for (int i = 0; i < _products.size(); i++)
+	{
+		totalPrice = _products[i]->getPrice() * _products[i]->getAmount();
+		if (totalPrice >= priceFrom && totalPrice <= priceTo && _products[i]->getTypeOp() == type)
+		{
+			table.firstCell(true);
+
+			cout << _products[i] << endl;
+		}
+		else
+		{
+			count++;
+		}
+	}
+
+	if (count == _products.size())
+	{
+		cout << "Ќет ни одного препарата, удовлетвор€ющего условию" << endl;
+	}
+}
+
 void ProductRepository::deleteRecord(string name, string type)
 {
 	int index;
